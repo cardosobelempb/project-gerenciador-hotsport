@@ -40,6 +40,8 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "typeorm": "^0.3.28",
+    "vite-tsconfig-paths": "^6.0.4",
+    "vitest": "^4.0.18",
     "zod": "^4.3.5"
   }
 }

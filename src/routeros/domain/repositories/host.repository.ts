@@ -1,4 +1,4 @@
-import { RepositoryDomain, UUIDVO } from '@/common'
+import { RepositorySearchable, UUIDVO } from '@/common'
 
 import { HostModel } from '../models/host.model'
 import { HostStatus } from '../models/status.enum'
@@ -7,7 +7,7 @@ export type HostId = {
   id: UUIDVO
 }
 export type HostCreateProps = {
-  id: UUIDVO
+  id?: UUIDVO
   macAddress: string
   address: string
   toAddress: string
@@ -15,13 +15,16 @@ export type HostCreateProps = {
   comment: string
   user: string
   status: HostStatus
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date | null
+  createdAt?: Date
+  updatedAt?: Date
+  deletedAt?: Date | null
 }
 
-export abstract class HostRepository extends RepositoryDomain<HostModel> {
+export abstract class HostRepository extends RepositorySearchable<
+  HostModel,
+  HostCreateProps
+> {
   abstract findByName(name: string): Promise<HostModel>
   abstract findAllByIds(hostIds: HostId[]): Promise<HostModel[]>
-  abstract conflictngName(name: string): Promise<void>
+  abstract ensureNameIsUnique(name: string): Promise<void>
 }

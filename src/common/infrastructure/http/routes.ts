@@ -1,8 +1,9 @@
 import { Router } from 'express'
-import loginController from './controllers/login.controller'
 
 const router = Router()
 
-router.get('/', loginController)
+router.get('/', () => {
+  return 'API is running'
+})
 
 export { router }
